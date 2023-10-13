@@ -24,12 +24,12 @@ class Banco(models.Model):
     updated_at=models.DateTimeField(auto_now=True)
 
 class Tarjeta(models.Model):
-    numeroTarjeta=models.IntegerField()
+    numero=models.CharField(max_length=16)
     codigoVerificacion=models.IntegerField()
-    fechaVencimiento=models.DateField()
+    fechaVencimiento=models.CharField(max_length=5)
     idCliente=models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    idProveedor=models.ForeignKey(Banco, on_delete=models.CASCADE)
-    idBanco=models.ForeignKey(Proveedores, on_delete=models.CASCADE)
+    idBanco=models.ForeignKey(Banco, on_delete=models.CASCADE)
+    idProveedores=models.ForeignKey(Proveedores, on_delete=models.CASCADE)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
    
