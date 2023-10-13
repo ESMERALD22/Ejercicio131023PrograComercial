@@ -50,3 +50,42 @@ class TarjetaByClienteView(View):
             data={'message':"ERROR, tarjeta del cliente no encontrada..."}
             return JsonResponse(data)
     
+
+class TarjetaByProveedoresView(View):
+    @method_decorator(csrf_exempt) #Saltamos restriccion
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def get(self,req,id=0):
+        id=int(id)
+        if(id>0):
+            tajetas=list(Tarjeta.objects.filter(idProveedores_id=id).values())
+            if len(tajetas)>0:
+                tajeta=tajetas[0]
+                data={'message':"SUCCESS", 'Tarjeta':tajeta}
+            else:
+                data={'message':"ERROR proveedores, tarjeta del cliente no encontrada..."}
+            return JsonResponse(data)
+        else:
+            data={'message':"ERROR proveedores, tarjeta del cliente no encontrada..."}
+            return JsonResponse(data)    
+class TarjetaByBancoView(View):
+    @method_decorator(csrf_exempt) #Saltamos restriccion
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def get(self,req,id=0):
+        id=int(id)
+        if(id>0):
+            tajetas=list(Tarjeta.objects.filter(idBanco_id=id).values())
+            if len(tajetas)>0:
+                tajeta=tajetas[0]
+                data={'message':"SUCCESS", 'Tarjeta':tajeta}
+            else:
+                data={'message':"ERROR banco, tarjeta del cliente no encontrada..."}
+            return JsonResponse(data)
+        else:
+            data={'message':"ERROR banco, tarjeta del cliente no encontrada..."}
+            return JsonResponse(data)
+        
+        
